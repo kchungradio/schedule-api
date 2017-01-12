@@ -4,11 +4,7 @@ const jwt = require('./lib/auth/jwt')
 const calendars = require('./lib/calendars')
 
 async function fetchEvents (date) {
-  let events
-
-  const propsToDelete = ['kind', 'etag', 'description', 'creator', 'organizer',
-    'iCalUID', 'reminders', 'status', 'htmlLink', 'created', 'updated',
-    'recurringEventId', 'sequence', 'originalStartTime']
+  let googleEvents
 
   try {
     await calendars.auth(jwt)
@@ -18,16 +14,20 @@ async function fetchEvents (date) {
   }
 
   try {
-    events = await calendars
+    googleEvents = await calendars
       .getEvents(date.getFullYear(), date.getMonth() + 1)
   } catch (err) {
     err.statusCode = 400
     throw err
   }
 
-  events.forEach((event) => {
-    for (let i of propsToDelete) delete event[i]
-  })
+  const events = googleEvents.map((event) => ({
+    id: event.id,
+    name: event.summary,
+    start: event.start.dateTime,
+    end: event.end.dateTime
+  }))
+
   return events
 }
 
