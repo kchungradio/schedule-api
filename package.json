@@ -1,6 +1,6 @@
 {
   "name": "kchungradio-schedule-api",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "KCHUNG Schedule API for http://www.kchungradio.org/schedule.html",
   "main": "index.js",
   "repository": "kchungradio/schedule-api",
