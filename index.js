@@ -8,7 +8,7 @@ async function fetchEvents (date) {
 
   const propsToDelete = ['kind', 'etag', 'description', 'creator', 'organizer',
     'iCalUID', 'reminders', 'status', 'htmlLink', 'created', 'updated',
-    'recurringEventId', 'sequence']
+    'recurringEventId', 'sequence', 'originalStartTime']
 
   try {
     await calendars.auth(jwt)
