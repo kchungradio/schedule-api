@@ -18,7 +18,7 @@
     "micro": "^6.1.0"
   },
   "scripts": {
-    "start": "micro -p 1630",
-    "deploy": "now -e GOOGLE_API_CLIENT_EMAIL=@kchung-gcal-service-email -e GOOGLE_API_PRIVATE_KEY_BASE64=@kchung-gcal-private-key -e GOOGLE_CALENDAR_ID=@kchung-gcal-calendar-id -e GOOGLE_USER_EMAIL=@kchung-gcal-user-email -e TZ=America/Los_Angeles"
+    "dev": "source ./lib/auth/env_secrets.sh && micro -p 1630",
+    "deploy": "now -e NODE_ENV=production -e GOOGLE_API_CLIENT_EMAIL=@kchung-gcal-service-email -e GOOGLE_API_PRIVATE_KEY_BASE64=@kchung-gcal-private-key -e GOOGLE_CALENDAR_ID=@kchung-gcal-calendar-id -e GOOGLE_USER_EMAIL=@kchung-gcal-user-email -e TZ=America/Los_Angeles"
   }
 }
