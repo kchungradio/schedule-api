@@ -2,10 +2,13 @@
   "name": "kchungradio-schedule-api",
   "version": "1.1.0",
   "description": "KCHUNG Schedule API for http://www.kchungradio.org/schedule.html",
-  "main": "index.js",
   "repository": "kchungradio/schedule-api",
   "author": "Tim Phillips",
   "license": "MIT",
+  "dependencies": {
+    "googleapis": "^15.0.0",
+    "micro": "^7.0.3"
+  },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
     "standard": "^8.6.0"
@@ -13,12 +16,18 @@
   "standard": {
     "parser": "babel-eslint"
   },
-  "dependencies": {
-    "googleapis": "^15.0.0",
-    "micro": "^6.1.0"
-  },
   "scripts": {
+    "start": "micro",
     "dev": "source ./lib/auth/env_secrets.sh && micro -p 1630",
-    "deploy": "now -e NODE_ENV=production -e GOOGLE_API_CLIENT_EMAIL=@kchung-gcal-service-email -e GOOGLE_API_PRIVATE_KEY_BASE64=@kchung-gcal-private-key -e GOOGLE_CALENDAR_ID=@kchung-gcal-calendar-id -e GOOGLE_USER_EMAIL=@kchung-gcal-user-email -e TZ=America/Los_Angeles"
+  },
+  "now": {
+    "env": {
+      "NODE_ENV": "production",
+      "GOOGLE_API_CLIENT_EMAIL": "@kchung-gcal-service-email",
+      "GOOGLE_API_PRIVATE_KEY_BASE64": "@kchung-gcal-private-key",
+      "GOOGLE_CALENDAR_ID": "@kchung-gcal-calendar-id",
+      "GOOGLE_USER_EMAIL": "@kchung-gcal-user-email",
+      "TZ": "America/Los_Angeles"
+    }
   }
 }
