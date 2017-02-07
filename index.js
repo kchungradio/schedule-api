@@ -36,6 +36,10 @@ async function fetchEvents (date) {
 module.exports = async function (req, res) {
   let pathname, date, events, year, month, err
 
+  if (process.env.NODE_ENV !== 'production') {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+  }
+
   // get query params from url
   pathname = url
     .parse(req.url)
