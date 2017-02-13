@@ -46,12 +46,14 @@ module.exports = async function (req, res) {
     .pathname
     .split('/')
   if (pathname.length !== 3) {
-    err = new Error('Include only month and year: e.g. "/2016/12"')
-    err.statusCode = 400
-    throw err
+    // get current year and month
+    const now = new Date()
+    year = now.getFullYear()
+    month = now.getMonth() + 1
+  } else {
+    year = pathname[1]
+    month = pathname[2]
   }
-  year = pathname[1]
-  month = pathname[2]
 
   date = new Date(year, month - 1)
 
