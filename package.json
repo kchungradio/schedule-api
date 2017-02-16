@@ -7,7 +7,8 @@
   "license": "MIT",
   "dependencies": {
     "googleapis": "^15.0.0",
-    "micro": "^7.0.3"
+    "micro": "^7.0.3",
+    "moment-timezone": "^0.5.11"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
@@ -21,6 +22,7 @@
     "dev": "source ./lib/auth/env_secrets.sh && micro -p 1630"
   },
   "now": {
+    "alias": "kchungradio-schedule-api.now.sh",
     "env": {
       "NODE_ENV": "production",
       "GOOGLE_API_CLIENT_EMAIL": "@kchung-gcal-service-email",
