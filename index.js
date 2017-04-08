@@ -1,4 +1,5 @@
 const url = require('url')
+const validator = require('validator')
 
 const jwt = require('./lib/auth/jwt')
 const calendars = require('./lib/calendars')
@@ -63,12 +64,25 @@ async function fetchEvents (date) {
     throw err
   }
 
-  const events = googleEvents.map(event => ({
-    id: event.id,
-    name: event.summary,
-    start: event.start.dateTime,
-    end: event.end.dateTime
-  })).filter(event => {
+  const events = googleEvents.map(event => {
+    sanitizedEvent = {
+      id: event.id,
+      name: event.summary,
+      start: event.start.dateTime,
+      end: event.end.dateTime
+    }
+
+    // find url in description
+    let url
+    if (event.description) {
+      url = event.description.split('\n').filter(line =>
+        validator.isURL(line) && line.indexOf('@') === -1
+      )[0]
+      if (url) sanitizedEvent.url = url
+    }
+
+    return sanitizedEvent
+  }).filter(event => {
     return !(event.name.includes('TENTATIVE') || event.name.includes('TBD'))
   })
 
