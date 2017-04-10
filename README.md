@@ -22,8 +22,36 @@ When requesting data from the API, you'll receive json in the following format:
 }
 ```
 
+### Filtering Data
+
+Any event whose name includes the words 'TENTATIVE' or 'TBD' will not be returned.
+
 ### Replacing the URL
 
 By default, the `url` field will be generated automatically by the api, like in the example above. `name` is processed by [`encodeURI()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI) to escape certain characters.
 
-If there is a url anywhere in the description field in the Google Calendar then that will be used instead.
+If there is a url anywhere in the description field for that event in the google calendar then that url will be used instead.
+
+## Contributing
+
+`git clone` this repository.
+
+Get `env_secrets.sh` from a secure channel and place in `lib/auth/`.
+
+Install dependencies and run:
+```bash
+yarn
+yarn dev
+```
+_Or alternatively:_
+```bash
+npm install
+npm run dev
+```
+
+Make your changes, create a Pull Request, wait for it to be merged.
+
+Deploy it to the cloud with [now](https://zeit.co/now):
+```bash
+now kchungradio/schedule-api
+```
