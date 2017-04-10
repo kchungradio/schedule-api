@@ -69,7 +69,8 @@ async function fetchEvents (date) {
       id: event.id,
       name: event.summary,
       start: event.start.dateTime,
-      end: event.end.dateTime
+      end: event.end.dateTime,
+      url: generateLacaUrl(event.summary)
     }
 
     // find url in description
@@ -88,3 +89,7 @@ async function fetchEvents (date) {
 
   return events
 }
+
+const generateLacaUrl = showName => (
+  `http://lacarchive.com/kchung/archive/show/${showName.replace(' ', '%20')}`
+)
