@@ -91,5 +91,5 @@ async function fetchEvents (date) {
 }
 
 const generateLacaUrl = showName => (
-  `http://lacarchive.com/kchung/archive/show/${showName.replace(/ /g, '%20')}`
+  encodeURI(`http://lacarchive.com/kchung/archive/show/${showName}`)
 )
