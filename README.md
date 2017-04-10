@@ -32,7 +32,7 @@ By default, the `url` field will be generated automatically by the api, like in 
 
 If there is a url anywhere in the description field for that event in the google calendar then that url will be used instead.
 
-## Contributing
+## Run locally
 
 `git clone` this repository.
 
@@ -49,9 +49,11 @@ npm install
 npm run dev
 ```
 
+## Contributing
+
 Make your changes, create a Pull Request, wait for it to be merged.
 
-Deploy it to the cloud with [now](https://zeit.co/now):
+Deploy to the cloud with [now](https://zeit.co/now):
 ```bash
 now kchungradio/schedule-api
 ```
