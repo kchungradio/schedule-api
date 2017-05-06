@@ -65,7 +65,7 @@ async function fetchEvents (date) {
   }
 
   const events = googleEvents.map(event => {
-    sanitizedEvent = {
+    let sanitizedEvent = {
       id: event.id,
       name: event.summary,
       start: event.start.dateTime,
@@ -84,7 +84,10 @@ async function fetchEvents (date) {
 
     return sanitizedEvent
   }).filter(event => {
-    return !(event.name.includes('TENTATIVE') || event.name.includes('TBD'))
+    return !(event.name.includes('TENTATIVE') ||
+      event.name.includes('TBD') ||
+      event.name.includes('Open Slot') ||
+      event.name.includes('DONOTLIST'))
   })
 
   return events

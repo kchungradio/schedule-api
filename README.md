@@ -24,7 +24,7 @@ When requesting data from the API, you'll receive json in the following format:
 
 ### Filtering Data
 
-Any event whose name includes the words 'TENTATIVE' or 'TBD' will not be returned.
+Any event whose name includes the words 'TENTATIVE', 'TBD', 'Open Slot', or 'DONOTLIST' will not be returned.
 
 ### Replacing the URL
 
