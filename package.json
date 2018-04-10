@@ -7,6 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "googleapis": "24",
+    "html-to-text": "^4.0.0",
     "micro": "^9.1.4",
     "moment-timezone": "^0.5.14",
     "validator": "^9.4.1"
@@ -21,7 +22,8 @@
   },
   "scripts": {
     "start": "micro",
-    "dev": "source ./lib/auth/env_secrets.sh && micro-dev -p 1630"
+    "dev": "source ./lib/auth/env_secrets.sh && micro-dev -p 1630",
+    "inspect": "source ./lib/auth/env_secrets.sh && npx -n --inspect micro-dev -p 1630"
   },
   "now": {
     "alias": "kchungradio-schedule-api.now.sh",
