@@ -30,7 +30,7 @@ Any event whose name includes the words 'TENTATIVE', 'TBD', 'Open Slot', or 'DON
 
 By default, the `url` field will be generated automatically by the api, like in the example above. `name` is processed by [`encodeURI()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI) to escape certain characters.
 
-If there is a url anywhere in the description field for that event in the google calendar then that url will be used instead.
+If there is a url anywhere in the description field for that event in the google calendar then that url will be used instead. If there are multiple urls, the first will be used.
 
 ## Run locally
 
