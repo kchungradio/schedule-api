@@ -8,9 +8,7 @@ const calendars = require('./lib/calendars')
 module.exports = async function (req, res) {
   let pathname, date, events, year, month, err
 
-  if (process.env.NODE_ENV !== 'production') {
-    res.setHeader('Access-Control-Allow-Origin', '*')
-  }
+  res.setHeader('Access-Control-Allow-Origin', '*')
 
   // get query params from url
   pathname = url
