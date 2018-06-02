@@ -1,3 +1,4 @@
+const { createError } = require('micro')
 const url = require('url')
 const validator = require('validator')
 const htmlToText = require('html-to-text')
@@ -6,34 +7,36 @@ const jwt = require('./lib/auth/jwt')
 const calendars = require('./lib/calendars')
 
 module.exports = async function (req, res) {
-  let pathname, date, events, year, month, err
-
+  // allow public access to our api from anywhere
   res.setHeader('Access-Control-Allow-Origin', '*')
 
-  // get query params from url
-  pathname = url
-    .parse(req.url)
-    .pathname
-    .split('/')
-  if (pathname.length !== 3) {
-    // get current year and month
-    const now = new Date()
+  // get the pathname "/year/month" from the url as ['', year, month]
+  const pathname = url.parse(req.url).pathname.split('/')
 
+  // set the year and month that we'll use to get events
+  let year, month
+  if (pathname.length !== 3) {
+    // if the request didn't include a pathname,
+    // then get the current year/month
+    const now = new Date()
     year = now.getUTCFullYear()
     month = now.getUTCMonth() + 1
   } else {
+    // otherwise get the provided year/month
     year = pathname[1]
     month = pathname[2]
   }
 
-  date = new Date(Date.UTC(year, month - 1))
+  // create a date from year/month
+  const date = new Date(Date.UTC(year, month - 1))
 
+  // throw an error if year/month does not make a date
   if (isNaN(date.getTime())) {
-    err = new Error('Not a date')
-    err.statusCode = 400
-    throw err
+    throw createError(400, 'Not a date')
   }
 
+  // fetch the events from google calendar
+  let events
   try {
     events = await fetchEvents(date)
   } catch (err) {
@@ -41,6 +44,7 @@ module.exports = async function (req, res) {
     throw err
   }
 
+  // return the events as a json 200 OK response
   return events
 }
 
@@ -63,38 +67,40 @@ async function fetchEvents (date) {
     throw err
   }
 
-  const events = googleEvents.map(event => {
-    let sanitizedEvent = {
-      id: event.id,
-      name: event.summary,
-      start: event.start.dateTime,
-      end: event.end.dateTime,
-      url: generateLacaUrl(event.summary)
-    }
+  return googleEvents.map(sanitizeEvent).filter(filterEvent)
+}
 
-    // find url in description
-    let url
-    if (event.description) {
-      const parsedDescription = htmlToText.fromString(event.description, {
-        preserveNewlines: true,
-        hideLinkHrefIfSameAsText: true
-      })
-      url = parsedDescription.split('\n').filter(line => {
-        // is url and is not email address
-        return validator.isURL(line) && line.indexOf('@') === -1
-      })[0]
-      if (url) sanitizedEvent.url = url
-    }
+function sanitizeEvent (event) {
+  let sanitizedEvent = {
+    id: event.id,
+    name: event.summary,
+    start: event.start.dateTime,
+    end: event.end.dateTime,
+    url: generateLacaUrl(event.summary)
+  }
 
-    return sanitizedEvent
-  }).filter(event => {
-    if (!event.name) return false
-    return !['TENTATIVE', 'TBD', 'Open Slot', 'DONOTLIST'].includes(event.name)
-  })
+  // find url in description
+  let url
+  if (event.description) {
+    const parsedDescription = htmlToText.fromString(event.description, {
+      preserveNewlines: true,
+      hideLinkHrefIfSameAsText: true
+    })
+    url = parsedDescription.split('\n').filter(line => {
+      // is url and is not email address
+      return validator.isURL(line) && line.indexOf('@') === -1
+    })[0]
+    if (url) sanitizedEvent.url = url
+  }
 
-  return events
+  return sanitizedEvent
 }
 
 const generateLacaUrl = showName => (
   encodeURI(`http://lacarchive.com/kchung/archive/show/${showName}`)
 )
+
+function filterEvent (event) {
+  if (!event.name) return false
+  return !['TENTATIVE', 'TBD', 'Open Slot', 'DONOTLIST'].includes(event.name)
+}
