@@ -89,10 +89,7 @@ async function fetchEvents (date) {
     return sanitizedEvent
   }).filter(event => {
     if (!event.name) return false
-    return !(event.name.includes('TENTATIVE') ||
-      event.name.includes('TBD') ||
-      event.name.includes('Open Slot') ||
-      event.name.includes('DONOTLIST'))
+    return !['TENTATIVE', 'TBD', 'Open Slot', 'DONOTLIST'].includes(event.name)
   })
 
   return events
