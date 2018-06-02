@@ -24,16 +24,5 @@
     "start": "micro",
     "dev": "source ./lib/auth/env_secrets.sh && micro-dev -p 1630",
     "inspect": "source ./lib/auth/env_secrets.sh && npx -n --inspect micro-dev -p 1630"
-  },
-  "now": {
-    "alias": "kchungradio-schedule-api.now.sh",
-    "env": {
-      "NODE_ENV": "production",
-      "GOOGLE_API_CLIENT_EMAIL": "@kchung-gcal-service-email",
-      "GOOGLE_API_PRIVATE_KEY_BASE64": "@kchung-gcal-private-key",
-      "GOOGLE_CALENDAR_ID": "@kchung-gcal-calendar-id",
-      "GOOGLE_USER_EMAIL": "@kchung-gcal-user-email",
-      "TZ": "America/Los_Angeles"
-    }
   }
 }
