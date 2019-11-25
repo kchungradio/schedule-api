@@ -14,15 +14,17 @@
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
+    "eslint": "^6.7.1",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-prettier": "^3.1.1",
     "micro-dev": "^2.2.2",
-    "standard": "^11.0.1"
-  },
-  "standard": {
-    "parser": "babel-eslint"
+    "prettier": "^1.19.1"
   },
   "scripts": {
     "start": "micro",
     "dev": "source ./lib/auth/env_secrets.sh && micro-dev -p 1630",
-    "inspect": "source ./lib/auth/env_secrets.sh && npx -n --inspect micro-dev -p 1630"
+    "inspect": "source ./lib/auth/env_secrets.sh && npx -n --inspect micro-dev -p 1630",
+    "lint": "eslint .",
+    "pretty": "prettier --check '**/*.js'"
   }
 }

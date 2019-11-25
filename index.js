@@ -3,7 +3,7 @@ const url = require('url')
 
 const fetchEvents = require('./lib/fetch-events')
 
-module.exports = async function (req, res) {
+module.exports = async function(req, res) {
   // allow public access to our api from anywhere
   res.setHeader('Access-Control-Allow-Origin', '*')
 
