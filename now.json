@@ -1,11 +1,18 @@
 {
-  "alias": "kchungradio-schedule-api.now.sh",
+  "name": "kchungradio-schedule-api",
+  "version": 2,
+  "scope": "kchungradio",
+  "builds": [
+    {
+      "src": "index.js",
+      "use": "now-micro"
+    }
+  ],
   "env": {
     "NODE_ENV": "production",
-    "GOOGLE_API_CLIENT_EMAIL": "@kchung-gcal-service-email",
-    "GOOGLE_API_PRIVATE_KEY_BASE64": "@kchung-gcal-private-key",
-    "GOOGLE_CALENDAR_ID": "@kchung-gcal-calendar-id",
-    "GOOGLE_USER_EMAIL": "@kchung-gcal-user-email",
-    "TZ": "America/Los_Angeles"
+    "GOOGLE_API_CLIENT_EMAIL": "@gcal-service-email",
+    "GOOGLE_API_PRIVATE_KEY_BASE64": "@gcal-private-key",
+    "GOOGLE_CALENDAR_ID": "@gcal-calendar-id",
+    "GOOGLE_USER_EMAIL": "@gcal-user-email"
   }
 }
