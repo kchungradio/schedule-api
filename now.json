@@ -8,6 +8,14 @@
       "use": "now-micro"
     }
   ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "index.js",
+      "methods": ["GET"],
+      "headers": { "Access-Control-Allow-Origin": "*" }
+    }
+  ],
   "env": {
     "NODE_ENV": "production",
     "GOOGLE_API_CLIENT_EMAIL": "@gcal-service-email",
