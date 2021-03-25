@@ -1,7 +1,10 @@
-const { createError } = require('micro')
 const url = require('url')
 
+const { createError } = require('micro')
+
 const fetchEvents = require('./lib/fetch-events')
+const sanitizeEvent = require('./lib/sanitize-event')
+const filterEvent = require('./lib/filter-event')
 
 module.exports = async function(req, res) {
   // allow public access to our api from anywhere
@@ -42,5 +45,5 @@ module.exports = async function(req, res) {
   }
 
   // return the events as a json 200 OK response
-  return events
+  return events.map(sanitizeEvent).filter(filterEvent)
 }
