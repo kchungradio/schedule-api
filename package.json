@@ -6,6 +6,7 @@
   "author": "Tim Phillips <tim@kchungradio.org>",
   "license": "MIT",
   "dependencies": {
+    "get-emails": "^3.0.0",
     "googleapis": "24",
     "html-to-text": "^5.1.1",
     "micro": "^9.1.4",

@@ -768,6 +768,11 @@ ecdsa-sig-formatter@1.0.11:
   dependencies:
     safe-buffer "^5.0.1"
 
+email-regex@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/email-regex/-/email-regex-3.0.0.tgz#60124ad22db6660c94e9f7e04d246b588b9440a8"
+  integrity sha512-5FxVen6tUcRJFHpFnW8jMMP4W7tP/xAaYIshi8ia72KMjmRJIwRvTZjWvJYd3qO6W7urOe4DmdbkNB2LkAs8JQ==
+
 emoji-regex@^7.0.1:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-7.0.3.tgz#933a04052860c85e83c122479c4748a8e4c72156"
@@ -1172,6 +1177,13 @@ get-caller-file@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.3.tgz#f978fa4c90d1dfe7ff2d6beda2a515e713bdcf4a"
   integrity sha512-3t6rVToeoZfYSGd8YoLFR2DJkiQrIiUrGcjvFX2mDw3bn6k2OtwHN0TNCLbBO+w8qTvimhDkv+LSscbJY1vE6w==
+
+get-emails@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/get-emails/-/get-emails-3.0.0.tgz#3030234f5c3552bb8aab442fbbaa26e9785f027c"
+  integrity sha512-bZsYKAbRtpVQAojhJ6Qg5pXh0h5A0KL0SdbhZXpXn0SYF/5b4l46OJsm1ZC/k5reHF64h1kyXG9pX9I09LuosA==
+  dependencies:
+    email-regex "^3.0.0"
 
 get-port@3.2.0:
   version "3.2.0"
